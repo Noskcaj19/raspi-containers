@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  scraper:
+    restart: unless-stopped
+    environment:
+      - INFLUX_ADDR
+      - INFLUX_ORG
+      - INFLUX_BUCKET
+      - INFLUX_TOKEN
+      - ROUTER_ADDR
+      - ROUTER_PASSWORD
+      - SCRAPE_RATE_SECS
+    build: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

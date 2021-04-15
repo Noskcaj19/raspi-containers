@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    build: ./wakapi-upstream
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      WAKAPI_DB_TYPE: "postgres"
+      WAKAPI_DB_NAME: "wakapi"
+      WAKAPI_DB_USER: "wakapi"
+      WAKAPI_DB_PASSWORD: "${WAKAPI_DB_PASSWORD}"
+      WAKAPI_DB_HOST: "db"
+      WAKAPI_DB_PORT: "5432"
+      ENVIRONMENT: "prod"
+
+  db:
+    image: postgres:12.3
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: "wakapi"
+      POSTGRES_PASSWORD: "${WAKAPI_DB_PASSWORD}"
+      POSTGRES_DB: "wakapi"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql

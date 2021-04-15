@@ -1,0 +1,3 @@
+[submodule "wakapi/wakapi-upstream"]
+	path = wakapi/wakapi-upstream
+	url = https://github.com/muety/wakapi

@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  telegraf:
+    container_name: telegraf
+    image: telegraf
+    restart: unless-stopped
+    environment:
+      - INFLUX_TOKEN
+      - INFLUX_ORG
+      - INFLUX_PING_BUCKET
+      - INFLUX_SYS_BUCKET
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - "$PWD/telegraf.conf:/etc/telegraf/telegraf.conf:ro"

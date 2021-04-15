@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: unless-stopped
+    ports:
+      - "3030:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    user: $UID
+    volumes:
+      - "$PWD/data-volume:/var/lib/grafana"
