@@ -2,6 +2,7 @@ version: "3"
 
 services:
   telegraf:
+    privileged: true
     container_name: telegraf
     build:
       context: .
@@ -12,7 +13,10 @@ services:
       - INFLUX_PING_BUCKET
       - INFLUX_SYS_BUCKET
       - INFLUX_SPEEDTEST_BUCKET
+      - "HOST_PROC=/hostfs/proc"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - "$PWD/telegraf.conf:/etc/telegraf/telegraf.conf:ro"
+      - "/:/hostfs:ro"
+      - "/run/udev:/run/udev:ro"
