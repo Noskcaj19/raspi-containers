@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  scraper:
+    restart: unless-stopped
+    environment:
+      - INFLUX_ADDR
+      - INFLUX_ORG
+      - INFLUX_BUCKET
+      - INFLUX_TOKEN
+      - MODEM_ADDR
+      - SCRAPE_RATE_SECS
+    build: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
