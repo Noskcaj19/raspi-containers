@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  caddy:
+    container_name: caddy
+    restart: unless-stopped
+    image: caddy
+    network_mode: host
+    volumes:
+      - "$PWD/Caddyfile:/etc/caddy/Caddyfile"
+      - "caddy_data:/data"
+volumes:
+  caddy_data:
+
